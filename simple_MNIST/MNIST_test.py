@@ -26,17 +26,14 @@ class simple_MNIST(object):
                 batch_xs, batch_ys = self.mnist.train.next_batch(100)
                 sess.run(self.train_step, feed_dict={self.x: batch_xs, self.y_: batch_ys})
 
-    def test(self):
-        correct_prediction = tf.equal(tf.argmax(self.y, 1), tf.argmax(self.y_, 1))
-        accuarcy = tf.reduce_mean(tf.cast(correct_prediction, "float"))
-        with tf.Session() as sess:
-            sess.run(tf.global_variables_initializer())
+            correct_prediction = tf.equal(tf.argmax(self.y, 1), tf.argmax(self.y_, 1))
+            accuarcy = tf.reduce_mean(tf.cast(correct_prediction, "float"))
+
             print(sess.run(accuarcy, feed_dict={self.x: self.mnist.test.images, self.y_: self.mnist.test.labels}))
 
 if __name__ == "__main__":
     mnist = simple_MNIST()
     mnist.train()
-    mnist.test()
 
 
 
