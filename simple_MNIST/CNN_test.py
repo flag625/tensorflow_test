@@ -80,7 +80,7 @@ class simple_CNN(object):
         train_step = tf.train.AdadeltaOptimizer(1e-4).minimize(self.cross_entropy)
         sess = tf.Session()
         sess.run(tf.global_variables_initializer())
-        for i in range(2000):
+        for i in range(20000):
             batch = self.mnist.train.next_batch(50)
             if i%100 == 0:
                 train_accuracy = self.accuracy.eval(session=sess, feed_dict={
@@ -99,6 +99,3 @@ if __name__ == "__main__":
     cnn = simple_CNN()
     cnn.graph()
     cnn.train()
-
-
-
